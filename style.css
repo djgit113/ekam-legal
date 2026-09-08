@@ -1,0 +1,171 @@
+/* Ekam legal pages — shared stylesheet.
+   No web fonts and no CDN: these pages must render identically and instantly for a Play
+   reviewer on a slow connection, and a policy page that depends on a third party to be
+   readable is a policy page that can go blank. */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #f8f6fc;
+  --surface: #ffffff;
+  --ink: #1c1b20;
+  --ink-soft: #6b6779;
+  --accent: #6750a4;
+  --edge: #e2deea;
+  --note-bg: #f2eef8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131218;
+    --surface: #1d1b24;
+    --ink: #e8e4f0;
+    --ink-soft: #a9a3b8;
+    --accent: #cfbcff;
+    --edge: #3a3547;
+    --note-bg: #232030;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2rem 1.25rem 4rem;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid var(--edge);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin: 0 0 0.4rem;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 2.25rem 0 0.6rem;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 1.5rem 0 0.4rem;
+}
+
+p, li { margin: 0 0 0.85rem; }
+
+ul { padding-left: 1.25rem; }
+
+a { color: var(--accent); }
+
+.app-name {
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.updated {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.lede {
+  font-size: 1.05rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Marks the paragraphs that only become true once the ad SDK ships. Visible on purpose:
+   an "if" in a privacy policy is a promise the reader cannot check, so while it is not yet
+   true it is labelled rather than merely worded carefully. */
+.pending {
+  background: var(--note-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+}
+
+.pending-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.todo {
+  background: #fff4e5;
+  border: 1px dashed #c77700;
+  color: #6b4300;
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .todo {
+    background: #2a1f10;
+    border-color: #c77700;
+    color: #f0c98a;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem 0.7rem;
+  border-bottom: 1px solid var(--edge);
+  vertical-align: top;
+}
+
+th { font-weight: 600; }
+
+.scroller { overflow-x: auto; }
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--edge);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+code {
+  background: var(--note-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
