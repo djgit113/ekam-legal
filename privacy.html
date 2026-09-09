@@ -12,13 +12,19 @@
 <header>
   <span class="app-name">Ekam</span>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 8 September 2026</p>
+  <p class="updated">Last updated: 9 September 2026</p>
 </header>
 
 <p class="lede">
-  Ekam does not collect your data. Everything you write in it — diary entries, photos,
-  reminders, events, lists, activities and money records — is stored only on your own device.
-  The app has no account, no sign-in, and no server of its own.
+  Everything you write in Ekam — diary entries, photos, reminders, events, lists, activities and
+  money records — is stored only on your own device. The app has no account, no sign-in, and no
+  server of its own, and none of what you write is ever sent anywhere.
+</p>
+<p class="lede">
+  The app does show adverts, supplied by Google AdMob. Those adverts are the one part of the app
+  that uses the internet, and the ad network collects information of its own — your device’s
+  advertising ID in particular. That is described in full under
+  <a href="#advertising">Advertising</a> below, including how to turn personalised adverts off.
 </p>
 
 <h2>Who this policy is from</h2>
@@ -30,9 +36,15 @@
 
 <h2>What the app collects</h2>
 <p>
-  <strong>Nothing is collected, transmitted or shared.</strong> The app does not request the
-  Android <code>INTERNET</code> permission, so it cannot send anything anywhere, and it
-  contains no analytics, no crash reporting and no advertising code.
+  <strong>We collect nothing.</strong> There is no account, no server belonging to us, and no
+  analytics or crash-reporting library in the app. Nothing you write is transmitted, and we have
+  no way to read any of it.
+</p>
+<p>
+  <strong>The advertising library does collect data</strong>, and it is the only component that
+  does. It is Google’s, not ours, and what it gathers is described under
+  <a href="#advertising">Advertising</a>. We never see your diary, your photographs or your
+  money records — the ad network does not either, because nothing in the app hands them to it.
 </p>
 <p>
   The information you enter stays in the app’s private storage on your device:
@@ -97,11 +109,33 @@
       is told only whether it succeeded, and never receives your fingerprint, face or device
       PIN.</td>
     </tr>
+    <tr>
+      <td><code>INTERNET</code> / <code>ACCESS_NETWORK_STATE</code></td>
+      <td>To fetch adverts, and for nothing else. No part of the app sends your entries,
+      photographs or records anywhere.</td>
+    </tr>
+    <tr>
+      <td><code>AD_ID</code></td>
+      <td>The device advertising ID, used by the ad network to choose which adverts to show and
+      to count them. See <a href="#advertising">Advertising</a>; you can reset or delete this ID
+      from your Android settings at any time.</td>
+    </tr>
+    <tr>
+      <td>
+        <code>ACCESS_ADSERVICES_AD_ID</code>,
+        <code>ACCESS_ADSERVICES_ATTRIBUTION</code>,
+        <code>ACCESS_ADSERVICES_TOPICS</code>,
+        <code>FOREGROUND_SERVICE</code>, <code>WAKE_LOCK</code>
+      </td>
+      <td>Added automatically by Google’s advertising library, which uses them for Android’s
+      Privacy Sandbox and for its own background work. They are listed here for completeness —
+      the app’s own code does not use any of them.</td>
+    </tr>
   </tbody>
 </table>
 </div>
 <p>
-  The app requests no internet, location, contacts, SMS, microphone or camera permission.
+  The app requests no location, contacts, SMS, microphone or camera permission.
 </p>
 
 <h2>When information leaves your device</h2>
@@ -124,50 +158,98 @@
   </li>
 </ul>
 
-<h2>Advertising</h2>
-<div class="pending">
-  <span class="pending-label">Not active in the current version</span>
-  <p>
-    The app currently contains <strong>no advertising code of any kind</strong> — no ad network
-    library, no ad identifiers, and no requests to any ad server. The blank bordered boxes you
-    may see in some screens are placeholders used while the layout is being designed.
-  </p>
-  <p style="margin-bottom:0">
-    We intend to introduce advertising in a future release. When that happens, this section
-    will be replaced with a description of the ad provider, the data it collects (which for
-    most ad networks includes your device’s advertising ID and approximate location), and how
-    to opt out — and the app’s Data safety information on Google Play will be updated in the
-    same release. Adverts will be limited to banner and in-feed formats. The app will not show
-    full-screen, app-open or rewarded adverts, and will never place an advert inside a
-    notification.
-  </p>
-</div>
+<h2 id="advertising">Advertising</h2>
+<p>
+  The app shows adverts supplied by <strong>Google AdMob</strong>. This is the only part of Ekam
+  that connects to the internet, and the only part that collects anything at all.
+</p>
+
+<h3>What the ad network collects</h3>
+<p>
+  When an advert is requested, Google receives information from your device. Google, not us,
+  decides what that is and how it is used; at the time of writing it includes:
+</p>
+<ul>
+  <li>your device’s <strong>advertising ID</strong>, a resettable identifier Android provides
+  specifically for this purpose;</li>
+  <li>your <strong>IP address</strong>, from which an approximate location can be derived;</li>
+  <li>device and app information — model, operating system version, language, and the fact that
+  the advert was requested by Ekam;</li>
+  <li>whether an advert was shown, and whether you interacted with it.</li>
+</ul>
+<p>
+  Google’s handling of this is governed by its own policies, not ours:
+  <a href="https://policies.google.com/technologies/partner-sites">How Google uses information
+  from sites or apps that use our services</a> and the
+  <a href="https://support.google.com/admob/answer/6128543">AdMob privacy information</a>.
+</p>
+
+<h3>What the ad network never receives</h3>
+<p>
+  <strong>Nothing you write.</strong> Your diary entries, photographs, reminders, events, lists,
+  activity logs and money records are never sent to Google or to anyone else. The app contains
+  no code that passes any of them to the advertising library, and the advertising library has no
+  access to the app’s private storage.
+</p>
+
+<h3>Your choices</h3>
+<ul>
+  <li>
+    <strong>In the EEA, the UK and Switzerland</strong>, the app asks for your consent before any
+    advert is requested, using Google’s consent platform. Nothing is fetched until you answer.
+    You can change your answer at any time from <em>Settings → Privacy options</em>.
+  </li>
+  <li>
+    <strong>Anywhere</strong>, you can limit or reset the advertising ID from
+    <em>Android Settings → Privacy → Ads</em>. Deleting it stops adverts being personalised;
+    you will still see adverts, but they will be chosen without it.
+  </li>
+</ul>
+
+<h3>What we will not do</h3>
+<p>
+  These are limits on the app itself, checked by an automated test that fails the build if any of
+  them is broken:
+</p>
+<ul>
+  <li>No full-screen, app-open, interstitial or rewarded adverts. Nothing takes over the screen
+  or interrupts what you are doing.</li>
+  <li>Never an advert inside a notification.</li>
+  <li>Never an advert on the calendar itself, or inside a dialog you cannot scroll away from.</li>
+  <li>Adverts appear only as banners and in-feed panels, in a small number of fixed places.</li>
+</ul>
 
 <h2>Children</h2>
 <p>
-  The app is not directed at children and collects no information from anyone, so it holds no
-  children’s data.
+  The app is not directed at children, and we collect no information from anyone. Adverts are
+  requested with Google’s content rating set to <strong>General audiences</strong>, so the
+  adverts shown are limited to material suitable for all ages.
 </p>
 
 <h2>Keeping and deleting your information</h2>
 <p>
-  Because nothing is sent to us, there is nothing for us to keep or delete. You control your
-  data entirely:
+  Because nothing you write is sent to us, there is nothing for us to keep or delete. You control
+  that data entirely:
 </p>
 <ul>
   <li>Delete any individual entry, event, reminder, list or record inside the app.</li>
-  <li>Remove the sample entries the app creates on first run, from Settings.</li>
   <li>Uninstalling the app removes its database, its settings and every photo it copied. Any
   backup archive you exported is not affected, because it is your file in your chosen
   location.</li>
 </ul>
+<p>
+  Information held by the ad network is a separate matter, and it is not ours to delete. Reset or
+  remove your advertising ID from <em>Android Settings → Privacy → Ads</em>, and use
+  <a href="https://myadcenter.google.com/">Google My Ad Center</a> to see and change what Google
+  holds against it.
+</p>
 
 <h2>Changes to this policy</h2>
 <p>
-  If the app changes in a way that affects this policy — most likely the introduction of
-  advertising described above — this page will be updated and the date at the top will change.
-  Material changes will take effect with the release that introduces them, so the policy always
-  describes the version of the app you are running.
+  If the app changes in a way that affects this policy, this page will be updated and the date at
+  the top will change. Material changes take effect with the release that introduces them, so the
+  policy always describes the version of the app you are running — the introduction of
+  advertising, described above, was made in exactly that way.
 </p>
 
 <h2>Contact</h2>
