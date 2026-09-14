@@ -12,7 +12,7 @@
 <header>
   <span class="app-name">Ekam</span>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 9 September 2026</p>
+  <p class="updated">Last updated: 14 September 2026</p>
 </header>
 
 <p class="lede">
@@ -21,9 +21,10 @@
   server of its own, and none of what you write is ever sent anywhere.
 </p>
 <p class="lede">
-  The app does show adverts, supplied by Google AdMob. Those adverts are the one part of the app
-  that uses the internet, and the ad network collects information of its own — your device’s
-  advertising ID in particular. That is described in full under
+  The app does show adverts, supplied by Google AdMob. Apart from asking Google Play about updates
+  and about the optional <a href="#google-play">Remove ads</a> purchase, those adverts are the one
+  part of the app that uses the internet, and the ad network collects information of its own —
+  your device’s advertising ID in particular. That is described in full under
   <a href="#advertising">Advertising</a> below, including how to turn personalised adverts off.
 </p>
 
@@ -41,8 +42,8 @@
   no way to read any of it.
 </p>
 <p>
-  <strong>The advertising library does collect data</strong>, and it is the only component that
-  does. It is Google’s, not ours, and what it gathers is described under
+  <strong>The advertising library does collect data</strong>, and apart from a purchase you choose
+  to make through <a href="#google-play">Google Play</a>, it is the only component that does. It is Google’s, not ours, and what it gathers is described under
   <a href="#advertising">Advertising</a>. We never see your diary, your photographs or your
   money records — the ad network does not either, because nothing in the app hands them to it.
 </p>
@@ -58,6 +59,7 @@
   <li>Money you record: expenses, and debts with their repayments</li>
   <li>Leave plans and day highlights</li>
   <li>Your settings, such as the state whose holidays you have chosen and your theme</li>
+  <li>Whether you have bought Remove ads — a copy of Google Play’s answer, so adverts stay hidden</li>
 </ul>
 <p>
   None of this is readable by us or by anyone else. It is held in the app’s own storage area,
@@ -121,6 +123,12 @@
       from your Android settings at any time.</td>
     </tr>
     <tr>
+      <td><code>BILLING</code></td>
+      <td>For the optional one-time purchase that removes adverts. The payment is handled entirely
+      by Google Play; the app is told only the price and whether you own the purchase. See
+      <a href="#google-play">Google Play</a>.</td>
+    </tr>
+    <tr>
       <td>
         <code>ACCESS_ADSERVICES_AD_ID</code>,
         <code>ACCESS_ADSERVICES_ATTRIBUTION</code>,
@@ -160,8 +168,9 @@
 
 <h2 id="advertising">Advertising</h2>
 <p>
-  The app shows adverts supplied by <strong>Google AdMob</strong>. This is the only part of Ekam
-  that connects to the internet, and the only part that collects anything at all.
+  The app shows adverts supplied by <strong>Google AdMob</strong>. Apart from the
+  <a href="#google-play">Google Play</a> checks, this is the only part of Ekam that connects to the
+  internet, and the only part that collects anything about how you use the app.
 </p>
 
 <h3>What the ad network collects</h3>
@@ -197,7 +206,7 @@
   <li>
     <strong>In the EEA, the UK and Switzerland</strong>, the app asks for your consent before any
     advert is requested, using Google’s consent platform. Nothing is fetched until you answer.
-    You can change your answer at any time from <em>Settings → Privacy options</em>.
+    You can change your answer at any time from <em>Settings → Ad privacy options</em>.
   </li>
   <li>
     <strong>Anywhere</strong>, you can limit or reset the advertising ID from
@@ -218,6 +227,22 @@
   <li>Never an advert on the calendar itself, or inside a dialog you cannot scroll away from.</li>
   <li>Adverts appear only as banners and in-feed panels, in a small number of fixed places.</li>
 </ul>
+
+<h2 id="google-play">Google Play: updates and the Remove ads purchase</h2>
+<p>
+  <strong>Updates.</strong> When the app opens, it asks the Google Play Store app on your phone
+  whether a newer version is available, so it can offer you the update. Google Play answers from
+  what it already knows about the apps installed from it; the app sends nothing of its own.
+</p>
+<p>
+  <strong>Remove ads.</strong> The app may offer a one-time purchase that removes its adverts. If
+  you buy it, the payment is handled entirely by Google Play, under
+  <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a>. We never receive your
+  card, UPI or bank details. The app only asks Google Play for the price and whether you own the
+  purchase, and remembers that answer on your device so the adverts stay hidden. Google Play gives
+  us the sales records it gives every developer — for example the order number, the product, the
+  price and the country.
+</p>
 
 <h2>Children</h2>
 <p>
