@@ -207,6 +207,39 @@ a.app-name { text-decoration: none; }
 
 .nowrap { white-space: nowrap; }
 
+/* "More in Ekam": one card per feature, as many across as the width allows. */
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.75rem;
+}
+
+.features li {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.features strong {
+  display: block;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
 .states {
   columns: 2;
   column-gap: 2rem;
