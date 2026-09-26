@@ -1,118 +1,265 @@
-/* Ekam legal pages — shared stylesheet.
-   No web fonts and no CDN: these pages must render identically and instantly for a Play
-   reviewer on a slow connection, and a policy page that depends on a third party to be
-   readable is a policy page that can go blank. */
+/* Ekam website — one stylesheet for every page.
+
+   The colours are the app's own (Palettes.kt in the app): the Amethyst accent, the Gazetted red
+   and Restricted blue the calendar draws, and the Yearly Calendar's twelve month colours — so a
+   page reads as part of Ekam, not as a website about it. The month bands' ink is picked by
+   contrast the way the app's inkOn does it.
+
+   One self-hosted font, for headings only: Bricolage Grotesque (SIL Open Font License,
+   fonts/OFL.txt). Body text is the phone's own. Nothing loads from a CDN: the legal pages must
+   render instantly for a Play reviewer on a slow connection, and a page that depends on a third
+   party to be readable is a page that can go blank. */
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("fonts/bricolage-grotesque-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
 
 :root {
   color-scheme: light dark;
 
-  --bg: #f8f6fc;
+  --bg: #fbf9fe;
   --surface: #ffffff;
-  --ink: #1c1b20;
-  --ink-soft: #6b6779;
-  --accent: #6750a4;
-  --edge: #e2deea;
-  --note-bg: #f2eef8;
+  --surface-2: #f4effb;
+  --ink: #1d1830;
+  --ink-soft: #5f5873;
+  --edge: #e6dff2;
+  --accent: #7a5eb0;
+  --on-accent: #ffffff;
+  --accent-soft: #eaddff;
+  --on-accent-soft: #27104f;
+  --gz: #d32f2f;
+  --rs: #1565c0;
+  --note-bg: #f4effb;
+  --shadow: 0 1px 2px rgb(29 24 48 / 0.05), 0 10px 28px -16px rgb(29 24 48 / 0.22);
+  --radius: 16px;
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue",
+    Arial, sans-serif;
+
+  /* The Yearly Calendar's month colours (light set) and the ink that reads on each. */
+  --m1: #4f6fb0;  --mi1: #ffffff;
+  --m2: #6c63b5;  --mi2: #ffffff;
+  --m3: #9d5fa8;  --mi3: #1d1830;
+  --m4: #c25f86;  --mi4: #1d1830;
+  --m5: #c77a4e;  --mi5: #1d1830;
+  --m6: #b79338;  --mi6: #1d1830;
+  --m7: #8fa23f;  --mi7: #1d1830;
+  --m8: #4f9e62;  --mi8: #1d1830;
+  --m9: #2f9787;  --mi9: #1d1830;
+  --m10: #3a87a8; --mi10: #1d1830;
+  --m11: #6e6fa8; --mi11: #ffffff;
+  --m12: #4a5e9e; --mi12: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #131218;
-    --surface: #1d1b24;
-    --ink: #e8e4f0;
-    --ink-soft: #a9a3b8;
-    --accent: #cfbcff;
-    --edge: #3a3547;
-    --note-bg: #232030;
+    --bg: #121019;
+    --surface: #1b1824;
+    --surface-2: #241f31;
+    --ink: #ece6f7;
+    --ink-soft: #aba3bd;
+    --edge: #342d45;
+    --accent: #c6adf2;
+    --on-accent: #2a1650;
+    --accent-soft: #3d2c63;
+    --on-accent-soft: #eaddff;
+    --gz: #ff7b72;
+    --rs: #6fb6ff;
+    --note-bg: #241f31;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -18px rgb(0 0 0 / 0.7);
+
+    /* The dark set: on a dark page a band has to be lighter than its ground. */
+    --m1: #9fb6e8;  --mi1: #1d1830;
+    --m2: #b2aae6;  --mi2: #1d1830;
+    --m3: #d2a3dc;  --mi3: #1d1830;
+    --m4: #e9a2bc;  --mi4: #1d1830;
+    --m5: #e8b392;  --mi5: #1d1830;
+    --m6: #dcc57e;  --mi6: #1d1830;
+    --m7: #c3d184;  --mi7: #1d1830;
+    --m8: #93d3a5;  --mi8: #1d1830;
+    --m9: #7fcfc2;  --mi9: #1d1830;
+    --m10: #8ac3dc; --mi10: #1d1830;
+    --m11: #afafe0; --mi11: #1d1830;
+    --m12: #9aa9de; --mi12: #1d1830;
   }
 }
 
+/* ---- Base ------------------------------------------------------------------------------- */
+
 * { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
 
 body {
   margin: 0;
-  padding: 2rem 1.25rem 4rem;
   background: var(--bg);
   color: var(--ink);
-  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  -webkit-text-size-adjust: 100%;
+  font: 16px/1.65 var(--font-body);
 }
 
-main {
-  max-width: 42rem;
-  margin: 0 auto;
-}
+a { color: var(--accent); text-underline-offset: 0.18em; }
 
-header {
-  border-bottom: 1px solid var(--edge);
-  padding-bottom: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-h1 {
-  font-size: 1.75rem;
-  line-height: 1.25;
-  margin: 0 0 0.4rem;
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
-h2 {
-  font-size: 1.15rem;
-  margin: 2.25rem 0 0.6rem;
-  text-wrap: balance;
-}
-
-h3 {
-  font-size: 1rem;
-  margin: 1.5rem 0 0.4rem;
-}
+h1 { font-size: clamp(2rem, 4.6vw, 3.2rem); font-weight: 750; margin: 0 0 0.8rem; }
+h2 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); font-weight: 700; margin: 3rem 0 1rem; }
+h3 { font-size: 1.1rem; font-weight: 700; margin: 1.75rem 0 0.5rem; }
 
 p, li { margin: 0 0 0.85rem; }
-
 ul { padding-left: 1.25rem; }
 
-a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+code {
+  background: var(--note-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.scroller { overflow-x: auto; }
+.nowrap { white-space: nowrap; }
+
+/* ---- Top bar ---------------------------------------------------------------------------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--edge);
+}
+
+.topbar-in {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: 750 1.25rem/1 var(--font-display);
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.brand svg { width: 28px; height: 28px; color: var(--accent); }
+
+.topnav { margin-left: auto; display: flex; align-items: center; gap: 1.25rem; }
+.topnav > a:not(.button) { color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.topnav > a:not(.button):hover { color: var(--ink); }
+
+@media (max-width: 40rem) { .hide-sm { display: none; } }
+
+/* ---- Buttons ---------------------------------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  padding: 0.8rem 1.3rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--accent) 80%, transparent);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.button:hover { transform: translateY(-1px); box-shadow: 0 12px 24px -10px color-mix(in srgb, var(--accent) 85%, transparent); }
+.button svg { width: 18px; height: 18px; flex: none; }
+.button.small { padding: 0.5rem 0.95rem; font-size: 0.9rem; box-shadow: none; }
+.button.ghost {
+  background: transparent;
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button, .state-card a { transition: none; }
+  .button:hover, .state-card a:hover { transform: none; }
+}
+
+/* ---- Pages ------------------------------------------------------------------------------ */
+
+main { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+main.page { max-width: 72rem; }
+.narrow { max-width: 46rem; }
+
+/* The legal pages: their own header and footer, inside main. */
+main > header { padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--edge); }
+main > footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--edge);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
 
 .app-name {
   display: inline-block;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.75rem;
 }
 
-.updated {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  margin: 0;
-}
+a.app-name { text-decoration: none; }
+
+.updated { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
 
 .lede {
-  font-size: 1.05rem;
-  color: var(--ink);
+  font-size: 1.06rem;
   background: var(--surface);
   border: 1px solid var(--edge);
-  border-radius: 12px;
-  padding: 1rem 1.15rem;
-  margin-bottom: 0.5rem;
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
 }
 
-/* Marks the paragraphs that only become true once the ad SDK ships. Visible on purpose:
-   an "if" in a privacy policy is a promise the reader cannot check, so while it is not yet
-   true it is labelled rather than merely worded carefully. */
-.pending {
+/* A labelled aside: the "not a government website" note, and the legal pages' notes. */
+.pending, .note {
   background: var(--note-bg);
+  border: 1px solid var(--edge);
   border-left: 3px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-  padding: 0.9rem 1.1rem;
-  margin: 1rem 0;
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.2rem;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
 }
 
-.pending-label {
+.pending-label, .note-label {
   display: block;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
@@ -130,119 +277,419 @@ a { color: var(--accent); }
 }
 
 @media (prefers-color-scheme: dark) {
-  .todo {
-    background: #2a1f10;
-    border-color: #c77700;
-    color: #f0c98a;
-  }
+  .todo { background: #2a1f10; border-color: #c77700; color: #f0c98a; }
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin: 1rem 0 1.5rem;
   font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 th, td {
   text-align: left;
-  padding: 0.6rem 0.7rem;
+  padding: 0.7rem 0.85rem;
   border-bottom: 1px solid var(--edge);
   vertical-align: top;
 }
 
-th { font-weight: 600; }
-
-.scroller { overflow-x: auto; }
-
-footer {
-  margin-top: 3rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--edge);
+th {
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--ink-soft);
-  font-size: 0.9rem;
+  background: var(--surface-2);
 }
 
-code {
-  background: var(--note-bg);
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-  font-size: 0.9em;
+tr:last-child td { border-bottom: 0; }
+
+/* ---- Hero ------------------------------------------------------------------------------- */
+
+.hero { padding: 2rem 0 1rem; }
+
+.hero.split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: center;
 }
 
-/* State holiday pages (holidays/), generated by the app's tools/holidays/site.sh.
-   New classes only, so the legal pages above look exactly as they did. */
+@media (max-width: 54rem) { .hero.split { grid-template-columns: 1fr; } }
 
-a.app-name { text-decoration: none; }
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-accent-soft);
+  background: var(--accent-soft);
+  padding: 0.38rem 0.75rem;
+  border-radius: 999px;
+  margin: 0 0 1rem;
+}
 
-.cta {
+.hero-sub {
+  font-size: clamp(1.05rem, 1.7vw, 1.22rem);
+  color: var(--ink-soft);
+  max-width: 40rem;
+  margin: 0 0 1.6rem;
+}
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin: 0; }
+
+.stats { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.9rem 0 0; }
+
+.stat {
   background: var(--surface);
   border: 1px solid var(--edge);
-  border-radius: 12px;
-  padding: 1rem 1.15rem;
-  margin: 1.5rem 0 0.5rem;
+  border-radius: 14px;
+  padding: 0.8rem 1.1rem;
+  min-width: 8.5rem;
+  box-shadow: var(--shadow);
 }
 
-.cta p { margin: 0 0 0.8rem; }
+.stat b { display: block; font: 750 1.9rem/1.05 var(--font-display); color: var(--ink); }
+.stat span { font-size: 0.86rem; font-weight: 600; color: var(--ink-soft); }
+.stat.gz b { color: var(--gz); }
+.stat.rs b { color: var(--rs); }
 
-/* The page's colours flipped, so it reads as the one thing to tap in both themes. */
-.button {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--bg);
-  font-weight: 600;
-  text-decoration: none;
-  padding: 0.6rem 1.1rem;
+/* On a phone the three figures wrapped two-and-one, leaving the last alone on a row of its
+   own. One row of equal tiles instead, however many there are; the label wraps. */
+@media (max-width: 40rem) {
+  .stats { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0.5rem; }
+  .stat { min-width: 0; padding: 0.7rem 0.8rem; }
+  .stat b { font-size: 1.6rem; }
+  .stat span { font-size: 0.8rem; }
+}
+
+/* The home page's picture: three calendar leaves, the app's own "today" tile. */
+.hero-art { position: relative; height: 21rem; }
+.hero-art .leaf { position: absolute; }
+.hero-art .a { left: 2%; top: 2.5rem; transform: rotate(-8deg); }
+.hero-art .b { left: 32%; top: 6rem; transform: rotate(3deg); z-index: 2; }
+.hero-art .c { right: 2%; top: 0.5rem; transform: rotate(9deg); }
+
+@media (max-width: 54rem) {
+  .hero-art { height: 15rem; max-width: 26rem; }
+  .hero-art .leaf.big { width: 7.2rem; }
+  .hero-art .leaf.big .leaf-day { font-size: 2.6rem; }
+}
+
+/* ---- The calendar leaf ------------------------------------------------------------------ */
+
+.leaf {
+  flex: none;
+  width: 3.75rem;
+  border-radius: 14px;
+  overflow: hidden;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+}
+
+.leaf-band {
+  display: block;
+  background: var(--m, var(--accent));
+  color: var(--mi, var(--on-accent));
+  font: 800 0.68rem/1 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.34rem 0 0.3rem;
+}
+
+.leaf-day {
+  display: block;
+  font: 750 1.55rem/1 var(--font-display);
+  color: var(--ink);
+  padding: 0.45rem 0.15rem 0.5rem;
+}
+
+.leaf-day.range { font-size: 1.05rem; padding: 0.62rem 0.15rem 0.66rem; }
+
+.leaf.big { width: 9rem; border-radius: 22px; box-shadow: 0 24px 44px -20px rgb(29 24 48 / 0.5); }
+.leaf.big .leaf-band { font-size: 0.95rem; padding: 0.6rem 0; }
+.leaf.big .leaf-day { font-size: 3.4rem; padding: 0.75rem 0 0.25rem; }
+.leaf-name { display: block; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); padding: 0 0.6rem 0.85rem; line-height: 1.3; }
+
+.m1 { --m: var(--m1); --mi: var(--mi1); }
+.m2 { --m: var(--m2); --mi: var(--mi2); }
+.m3 { --m: var(--m3); --mi: var(--mi3); }
+.m4 { --m: var(--m4); --mi: var(--mi4); }
+.m5 { --m: var(--m5); --mi: var(--mi5); }
+.m6 { --m: var(--m6); --mi: var(--mi6); }
+.m7 { --m: var(--m7); --mi: var(--mi7); }
+.m8 { --m: var(--m8); --mi: var(--mi8); }
+.m9 { --m: var(--m9); --mi: var(--mi9); }
+.m10 { --m: var(--m10); --mi: var(--mi10); }
+.m11 { --m: var(--m11); --mi: var(--mi11); }
+.m12 { --m: var(--m12); --mi: var(--mi12); }
+
+/* ---- Holiday list ----------------------------------------------------------------------- */
+
+.list-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin: 2.75rem 0 1.25rem;
+}
+
+.list-head h2 { margin: 0; }
+
+.filters {
+  display: inline-flex;
+  gap: 0.2rem;
+  padding: 0.25rem;
+  background: var(--surface-2);
+  border: 1px solid var(--edge);
   border-radius: 999px;
 }
 
-.button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-
-.desc {
-  display: block;
+.filters button {
+  font: 600 0.9rem/1 var(--font-body);
   color: var(--ink-soft);
-  font-size: 0.88rem;
-  margin-top: 0.15rem;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
 }
 
-.nowrap { white-space: nowrap; }
+.filters button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgb(0 0 0 / 0.14); }
 
-/* "More in Ekam": one card per feature, as many across as the width allows. */
+.month { margin: 0 0 1.9rem; }
+
+.month-name { display: flex; align-items: center; gap: 0.6rem; font-size: 1.1rem; margin: 0 0 0.8rem; }
+.month-name::before { content: ""; width: 0.8rem; height: 0.8rem; border-radius: 4px; background: var(--m); }
+.month-name span {
+  font: 700 0.78rem/1 var(--font-body);
+  color: var(--ink-soft);
+  background: var(--surface-2);
+  border-radius: 999px;
+  padding: 0.3rem 0.6rem;
+}
+
+.hols { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+
+.hol {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  margin: 0;
+}
+
+.hol-body { flex: 1; min-width: 0; }
+.hol-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.6rem; margin-bottom: 0.2rem; }
+.hol-name { font-weight: 700; font-size: 1.03rem; color: var(--ink); margin: 0; }
+.hol-when { margin: 0 0 0.3rem; font-size: 0.9rem; font-weight: 600; color: var(--ink-soft); }
+.hol-desc { margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
+
+.pill {
+  flex: none;
+  font: 800 0.68rem/1 var(--font-body);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.38rem 0.6rem;
+  border-radius: 999px;
+}
+
+.pill.gz { color: var(--gz); background: color-mix(in srgb, var(--gz) 13%, transparent); }
+.pill.rs { color: var(--rs); background: color-mix(in srgb, var(--rs) 13%, transparent); }
+
+.weekend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.6rem;
+}
+
+.weekend li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.85rem;
+}
+
+.weekend .leaf { width: 3.2rem; }
+.weekend .leaf-day { font-size: 1.3rem; }
+.weekend b { display: block; line-height: 1.3; }
+.weekend .sub { font-size: 0.88rem; color: var(--ink-soft); font-weight: 600; }
+
+.section-sub { color: var(--ink-soft); max-width: 42rem; margin-top: -0.4rem; }
+
+/* ---- Feature cards ---------------------------------------------------------------------- */
+
 .features {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 1.25rem;
+  margin: 1.1rem 0 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 0.85rem;
 }
 
 .features li {
   margin: 0;
   background: var(--surface);
   border: 1px solid var(--edge);
-  border-radius: 12px;
-  padding: 0.85rem 1rem;
-  font-size: 0.95rem;
+  border-radius: 18px;
+  padding: 1.15rem 1.2rem;
   color: var(--ink-soft);
+  font-size: 0.95rem;
+  box-shadow: var(--shadow);
 }
 
-.features strong {
-  display: block;
-  color: var(--ink);
-  margin-bottom: 0.2rem;
+.features .icon {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--on-accent-soft);
+  margin-bottom: 0.8rem;
 }
 
-.actions {
+.features .icon svg { width: 1.35rem; height: 1.35rem; }
+.features .icon text { font: 700 14px var(--font-body); }
+.features strong { display: block; color: var(--ink); font: 700 1.06rem/1.3 var(--font-display); margin-bottom: 0.3rem; }
+
+/* ---- Bands, chips, cards ---------------------------------------------------------------- */
+
+.band {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem 1.25rem;
+  justify-content: space-between;
+  gap: 1.1rem 2rem;
+  margin: 3rem 0;
+  padding: 1.8rem 1.9rem;
+  border-radius: 24px;
+  border: 1px solid var(--edge);
+  background:
+    radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+    var(--accent-soft);
 }
 
-.states {
-  columns: 2;
-  column-gap: 2rem;
+.band h2 { margin: 0 0 0.35rem; }
+.band p { margin: 0; color: var(--on-accent-soft); max-width: 36rem; }
+
+.chips { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li { margin: 0; }
+.chips a {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
 }
 
-.states li { margin-bottom: 0.35rem; }
+.chips a:hover { border-color: var(--accent); color: var(--accent); }
+
+.search {
+  width: 100%;
+  max-width: 24rem;
+  font: inherit;
+  padding: 0.75rem 1.1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--edge);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.search:focus { outline: none; border-color: var(--accent); }
+
+.state-grid {
+  list-style: none;
+  padding: 0;
+  margin: 1.1rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.7rem;
+}
+
+.state-card { margin: 0; }
+
+.state-card a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.state-card a:hover { border-color: var(--accent); transform: translateY(-1px); }
+.state-card b { display: block; font: 700 1.06rem/1.3 var(--font-display); }
+.state-card small { font-size: 0.86rem; color: var(--ink-soft); }
+.state-card .go { color: var(--accent); font-size: 1.25rem; line-height: 1; }
+
+.empty { color: var(--ink-soft); }
+
+/* ---- Site footer ------------------------------------------------------------------------ */
+
+.site-footer { border-top: 1px solid var(--edge); background: var(--surface); }
+
+.site-footer-in {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 46rem) {
+  .site-footer-in { grid-template-columns: 1fr 1fr; }
+  .site-footer .about { grid-column: 1 / -1; }
+}
+
+.site-footer .about p { color: var(--ink-soft); font-size: 0.95rem; margin-top: 0.6rem; max-width: 22rem; }
+.site-footer h4 {
+  font: 800 0.75rem/1 var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0.3rem 0 0.9rem;
+}
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer li { margin: 0 0 0.5rem; }
+.site-footer a:not(.brand) { color: var(--ink); text-decoration: none; }
+.site-footer a:not(.brand):hover { color: var(--accent); }
+.site-footer .copy {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--edge);
+  padding-top: 1.25rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
