@@ -377,10 +377,16 @@ tr:last-child td { border-bottom: 0; }
 .hero-art .b { left: 32%; top: 6rem; transform: rotate(3deg); z-index: 2; }
 .hero-art .c { right: 2%; top: 0.5rem; transform: rotate(9deg); }
 
-@media (max-width: 54rem) {
-  .hero-art { height: 15rem; max-width: 26rem; }
+/* The small leaves start well before the one-column layout: on a laptop-width window the
+   picture's column is too narrow for three full-size leaves, and the middle one covered the
+   names on the other two ("dhi Jayanti"). */
+@media (max-width: 72rem) {
   .hero-art .leaf.big { width: 7.2rem; }
   .hero-art .leaf.big .leaf-day { font-size: 2.6rem; }
+}
+
+@media (max-width: 54rem) {
+  .hero-art { height: 15rem; max-width: 26rem; }
 }
 
 /* ---- The calendar leaf ------------------------------------------------------------------ */
